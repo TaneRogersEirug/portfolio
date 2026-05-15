@@ -1,0 +1,449 @@
+/* =====================================================
+   🎨 THEME COLOURS — the only place you need to edit
+   =====================================================
+
+   --bg          : page background
+   --bg-alt      : slightly offset sections (work, process)
+   --bg-surface  : cards, frames, placeholders
+   --bg-deep     : darker surface (headshot panel, video cards)
+   --text        : primary text colour
+   --accent      : primary accent (buttons, eyebrow labels, hover states)
+   --accent-dark : darker accent for button hover
+   --gold        : secondary accent (italic headings, stat numbers, email)
+   --border      : subtle dividing lines
+
+   Opacity helpers — derived from --text colour.
+   Swap the RGB values here if you change --text:
+   --op-60  : body copy
+   --op-55  : intro paragraphs
+   --op-50  : step descriptions, contact sub
+   --op-45  : tags
+   --op-40  : stat labels, social links
+   --op-30  : scroll hint, step arrows, footer logo
+   --op-25  : headshot placeholder label, card hover border
+   --op-20  : footer copy, video placeholder
+   --op-06  : service card number tint, hover bg
+   --op-025 : watermark text
+
+   ─────────────────────────────────────────────────────
+   Chalk & Carbon (light):
+     --bg: #ffffff  --bg-alt: #f5f5f5  --bg-surface: #efefef
+     --bg-deep: #e8e8e8  --text: #111111
+     --accent: #d63030  --accent-dark: #a82424  --gold: #b89030
+     --border: rgba(17,17,17,0.12)
+     opacity vars: rgba(17,17,17,…)
+
+   Dark + Red + Gold (original):
+     --bg: #0a0a0a  --bg-alt: #0d0c0b  --bg-surface: #141210
+     --bg-deep: #1c1915  --text: #f5f2ec
+     --accent: #e63329  --accent-dark: #b52920  --gold: #c9a84c
+     --border: rgba(245,242,236,0.12)
+     opacity vars: rgba(245,242,236,…)
+
+   Navy + Teal + Cream:
+     --bg: #0d1b2a  --bg-alt: #0f1e2e  --bg-surface: #152436
+     --bg-deep: #1a2d42  --text: #f0ede4
+     --accent: #00b4a6  --accent-dark: #008f84  --gold: #e2c87a
+     --border: rgba(240,237,228,0.12)
+     opacity vars: rgba(240,237,228,…)
+   ───────────────────────────────────────────────────── */
+
+:root {
+  --bg:          #ffffff;
+  --bg-alt:      #f5f5f5;
+  --bg-surface:  #efefef;
+  --bg-deep:     #e8e8e8;
+  --text:        #111111;
+  --accent:      #d63030;
+  --accent-dark: #a82424;
+  --gold:        #b89030;
+  --border:      rgba(17,17,17,0.12);
+
+  --op-60:  rgba(17,17,17,0.60);
+  --op-55:  rgba(17,17,17,0.55);
+  --op-50:  rgba(17,17,17,0.50);
+  --op-45:  rgba(17,17,17,0.45);
+  --op-40:  rgba(17,17,17,0.40);
+  --op-30:  rgba(17,17,17,0.30);
+  --op-25:  rgba(17,17,17,0.25);
+  --op-20:  rgba(17,17,17,0.20);
+  --op-06:  rgba(17,17,17,0.06);
+  --op-025: rgba(17,17,17,0.025);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── Nav ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.8rem 3rem;
+}
+nav::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 92%, transparent), transparent);
+  pointer-events: none; z-index: -1;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 0.08em;
+  color: var(--text); text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2.4rem; list-style: none; }
+.nav-links a {
+  color: var(--text); text-decoration: none;
+  font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+  opacity: 0.6; transition: opacity 0.2s, color 0.2s;
+}
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+
+/* ─── Buttons ─── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  transition: all 0.25s;
+}
+.btn-primary { background: var(--accent); color: var(--bg); border: 2px solid var(--accent); }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--text); border: 2px solid var(--op-30); }
+.btn-outline:hover { border-color: var(--text); transform: translateY(-2px); }
+
+/* ─── Shared section styles ─── */
+section { padding: 7rem 3rem; }
+.section-eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 5rem); line-height: 1; letter-spacing: 0.02em;
+}
+.section-title em { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--gold); }
+
+/* ─── Hero ─── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 8rem 3rem 5rem; position: relative; z-index: 2;
+}
+.hero-tag {
+  font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.6rem;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 8vw, 8rem); line-height: 0.92; letter-spacing: 0.02em;
+  opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+}
+.hero-name em { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--gold); display: block; }
+.hero-sub {
+  margin-top: 2rem; font-size: 0.95rem; line-height: 1.8;
+  color: var(--op-60); max-width: 380px;
+  opacity: 0; animation: fadeUp 0.8s 0.55s forwards;
+}
+.hero-cta {
+  margin-top: 3rem; display: flex; gap: 1rem;
+  opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+}
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 3rem;
+  display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--op-30); z-index: 2;
+  animation: fadeIn 1s 1.2s both;
+}
+.scroll-line {
+  width: 40px; height: 1px; background: var(--accent);
+  animation: lineGrow 1s 1.4s both; transform-origin: left;
+}
+
+/* ─── Hero right: headshot ─── */
+.hero-right { position: relative; overflow: hidden; }
+.hero-img-frame { position: absolute; inset: 0; background: var(--bg-deep); }
+.hero-img-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(105deg, var(--bg) 0%, var(--bg) 26%, transparent 52%);
+  z-index: 2;
+}
+/*
+  TO ADD YOUR HEADSHOT:
+  1. Put headshot.jpg in the same folder as index.html
+  2. Remove the .headshot-placeholder block from the HTML
+  3. Add to .hero-img-frame:
+       background-image: url('headshot.jpg');
+       background-size: cover;
+       background-position: center top;
+*/
+.headshot-placeholder {
+  position: absolute; inset: 0; z-index: 1;
+  background-color: var(--bg-deep);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+}
+.headshot-placeholder svg { opacity: 0.18; width: 120px; height: 120px; }
+.headshot-placeholder-label {
+  font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--op-25);
+}
+
+/* ─── About ─── */
+.about {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+  align-items: center; border-top: 1px solid var(--border);
+}
+.about-text .section-title { margin-bottom: 2rem; }
+.about-body { font-size: 0.95rem; line-height: 1.95; color: var(--op-60); }
+.about-body p + p { margin-top: 1.2rem; }
+.about-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  margin-top: 3rem; border: 1px solid var(--border);
+}
+.stat { padding: 1.8rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stat:nth-child(2), .stat:nth-child(4) { border-right: none; }
+.stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; }
+.stat-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--op-40); margin-top: 0.4rem; }
+
+.about-visual { position: relative; }
+.about-frame {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--bg-surface); border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.about-frame::before {
+  content: ''; position: absolute; top: -1px; left: 3rem; right: 3rem;
+  height: 3px; background: var(--gold);
+}
+.about-accent {
+  position: absolute; bottom: -2rem; right: -2rem;
+  width: 180px; height: 180px;
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, transparent); border-radius: 50%;
+}
+.about-accent::before {
+  content: ''; position: absolute; inset: 20px;
+  border: 1px solid color-mix(in srgb, var(--gold) 10%, transparent); border-radius: 50%;
+}
+.about-inner-visual {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.about-monogram {
+  font-family: 'Bebas Neue', sans-serif; font-size: 6rem;
+  line-height: 1; color: var(--op-06); letter-spacing: 0.05em;
+}
+.about-role-list { position: absolute; bottom: 2rem; left: 2rem; list-style: none; }
+.about-role-list li {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--op-30); display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.35rem 0; border-bottom: 1px solid var(--border);
+}
+.about-role-list li::before { content: ''; width: 16px; height: 1px; background: var(--accent); flex-shrink: 0; }
+
+/* ─── Services ─── */
+.services { background: var(--bg); border-top: 1px solid var(--border); }
+.services-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; margin-top: 4rem; border: 1px solid var(--border);
+}
+.service-card {
+  padding: 3rem 2.5rem; border-right: 1px solid var(--border);
+  position: relative; overflow: hidden; transition: background 0.3s;
+}
+.service-card:last-child { border-right: none; }
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 3px; height: 0; background: var(--accent); transition: height 0.4s ease;
+}
+.service-card:hover::before { height: 100%; }
+.service-card:hover { background: var(--op-06); }
+.service-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--op-06); line-height: 1; margin-bottom: 1.5rem; }
+.service-icon { width: 40px; height: 40px; margin-bottom: 1.5rem; opacity: 0.8; }
+.service-name { font-family: 'DM Serif Display', serif; font-size: 1.5rem; line-height: 1.2; margin-bottom: 1rem; }
+.service-desc { font-size: 0.88rem; line-height: 1.8; color: var(--op-55); }
+.service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.tag {
+  font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.3rem 0.75rem; border: 1px solid var(--border); color: var(--op-45);
+}
+
+/* ─── Work ─── */
+.work { background: var(--bg-alt); border-top: 1px solid var(--border); }
+.work-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: end; margin-bottom: 4rem;
+}
+.work-intro p { font-size: 1rem; line-height: 1.9; color: var(--op-55); }
+
+/* ── Video grid: phone-format (9:16) cards ── */
+.video-grid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+.video-card {
+  flex: 1 1 0; min-width: 0;
+  position: relative; border-radius: 8px; overflow: hidden;
+  background: var(--bg-surface);
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.video-card:hover { transform: translateY(-4px); border-color: var(--op-25); }
+.video-card video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.video-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.75rem;
+  background: var(--bg-surface); pointer-events: none;
+}
+.video-placeholder svg { opacity: 0.2; width: 44px; height: 44px; }
+.video-placeholder span {
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--op-20);
+}
+/* Video overlay always dark so text on top of footage stays readable */
+.video-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 40%, transparent 65%);
+  pointer-events: none; z-index: 2;
+}
+.video-card-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1rem 1rem 3.5rem; z-index: 3; pointer-events: none;
+}
+.video-card-cat {
+  font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.3rem; display: block;
+}
+/* Title stays white because it sits on the dark video gradient */
+.video-card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 0.95rem; line-height: 1.3; color: #ffffff;
+}
+/* Unmute button also lives on video — keep it dark/white */
+.unmute-btn {
+  position: absolute; bottom: 1rem; right: 1rem; z-index: 10;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0; backdrop-filter: blur(4px);
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.unmute-btn:hover { background: rgba(0,0,0,0.75); border-color: rgba(255,255,255,0.6); transform: scale(1.1); }
+.unmute-btn svg { width: 15px; height: 15px; fill: #ffffff; flex-shrink: 0; }
+
+/* ─── Process ─── */
+.process { background: var(--bg-alt); border-top: 1px solid var(--border); }
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 4rem; }
+.process-step {
+  padding: 2.5rem 2rem; border-right: 1px solid var(--border);
+  border-top: 1px solid var(--border); position: relative;
+}
+.process-step:last-child { border-right: none; }
+.step-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+.step-name { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.8rem; }
+.step-desc { font-size: 0.84rem; line-height: 1.75; color: var(--op-50); }
+.step-arrow {
+  position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+  width: 24px; height: 24px; background: var(--bg-alt);
+  border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1; font-size: 0.7rem; color: var(--op-30);
+}
+.process-step:last-child .step-arrow { display: none; }
+
+/* ─── Contact ─── */
+.contact {
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 8rem 3rem; position: relative; overflow: hidden;
+}
+.contact::before {
+  content: 'CONTACT';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: 18vw;
+  color: var(--op-025); pointer-events: none; white-space: nowrap;
+}
+.contact .section-eyebrow { display: flex; justify-content: center; }
+.contact .section-title { margin-bottom: 1rem; }
+.contact-sub { font-size: 1rem; color: var(--op-50); margin-bottom: 3rem; line-height: 1.7; }
+.contact-email {
+  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--gold);
+  text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  padding-bottom: 0.3rem; transition: border-color 0.25s, color 0.25s;
+  margin-bottom: 3rem; display: inline-block;
+}
+.contact-email:hover { border-color: var(--gold); }
+.contact-cta { display: flex; justify-content: center; margin-top: 2rem; }
+.social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2.5rem; }
+.social-link {
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--op-40); text-decoration: none; transition: color 0.2s;
+}
+.social-link:hover { color: var(--text); }
+
+/* ─── Footer ─── */
+footer {
+  border-top: 1px solid var(--border); padding: 2rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; color: var(--op-30); }
+.footer-logo span { color: var(--accent); }
+.footer-copy { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--op-20); }
+
+/* ─── Animations ─── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Responsive ─── */
+@media (max-width: 1100px) {
+  .video-grid { gap: 1rem; }
+}
+@media (max-width: 900px) {
+  nav { padding: 1.4rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 8rem 1.5rem 4rem; }
+  section { padding: 5rem 1.5rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .work-intro { grid-template-columns: 1fr; gap: 2rem; }
+  .video-grid { flex-direction: column; align-items: center; gap: 1.25rem; }
+  .video-card { flex: none; width: min(72vw, 320px); }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-visual { display: none; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .process-step { border-bottom: 1px solid var(--border); }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+@media (max-width: 480px) {
+  .video-card { width: min(85vw, 300px); }
+}
